@@ -1,5 +1,5 @@
 
-
+import { api_key } from './config.js';
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -17,13 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
         //Permet d'envoyer la requête
         request.send();
       }
+      
 
 
 
 
     
 
-    fetch(`https://br1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=`, "GET", championListe)
+    fetch(`https://br1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=${api_key}`, "GET", championListe)
 
     function championListe(){
         const request = JSON.parse(this.response);
