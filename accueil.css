@@ -3,6 +3,7 @@ body {
   }
   
   ul {
+    display: flex;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -18,7 +19,7 @@ body {
     display: flex;
     color: white;
     text-align: center;
-    padding: 20px 184px;
+    padding: 5% 184px;
     text-decoration: none;
   }
   
@@ -28,4 +29,28 @@ body {
   
   .active {
     background-color: #04AA6D;
+  }
+
+  .flex{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5%;
+  }
+
+  .flex .container {
+    border: 1px solid;
+    width: 20%;
+    height: 400px;
+    background-color: #9191de;
+  }
+
+  .flex .containerImg{
+    width: 80%;
+    margin-left: 9%;
+    margin-top: 2%;
+
+  }
+
+  .containerImg img{
+    width: 100%;
   }
