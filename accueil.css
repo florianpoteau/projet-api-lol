@@ -39,8 +39,8 @@ body {
 
   .flex .container {
     border: 1px solid;
-    width: 20%;
-    height: 400px;
+    width: 25%;
+    height: 600px;
     background-color: #9191de;
   }
 
@@ -53,4 +53,8 @@ body {
 
   .containerImg img{
     width: 100%;
+  }
+
+  .containerImg img:hover{
+    transform: scale(1.1);
   }

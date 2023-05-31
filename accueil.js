@@ -53,10 +53,14 @@ const container = document.querySelectorAll(".container")
         // Puisque listeImage est une nodeList, création d'une variable qui permet d'itérer sur cette liste afin de récupérer élément par élément
         const containerImg = listeImage[i];
     containerImg.appendChild(imageChampion);
-
     // Evenement au click des images
 
             imageChampion.addEventListener("click", () =>{
+
+                const hp = champion.stats.hp
+                const armure = champion.stats.armor
+                const attaque = champion.stats.attaque
+                const speed = champion.stats.movespeed
 
 
                 // Création du graphique en html
@@ -74,12 +78,12 @@ const container = document.querySelectorAll(".container")
                 const ctx = document.getElementById('myChart');
 
                     new Chart(ctx, {
-                        type: 'bar',
+                        type: 'radar',
                         data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        labels: ['HP', 'Armure', 'Attaque', 'Speed'],
                         datasets: [{
                             label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
+                            data: [hp, armure, attaque, speed],
                             borderWidth: 1
                         }]
                         },
@@ -92,7 +96,7 @@ const container = document.querySelectorAll(".container")
                         }
                     });
 
-                    
+
                 
             })
 
