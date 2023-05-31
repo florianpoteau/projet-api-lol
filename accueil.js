@@ -42,6 +42,8 @@ const divGauche = document.querySelector(".listeChampion")
 
         const champion = champions[championKey];
 
+        const idChampion = champion.id
+
         // Récupération de l'image de chaque champion
         const championImage = champion.image.full;
 
@@ -55,8 +57,6 @@ const divGauche = document.querySelector(".listeChampion")
 
         container.appendChild(containerImg1)
 
-        console.log(container);
-
         const imageChampion = document.createElement("img")
 
         imageChampion.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${championImage}`;
@@ -65,8 +65,6 @@ const divGauche = document.querySelector(".listeChampion")
     containerImg1.appendChild(imageChampion);
 
     divGauche.appendChild(container)
-
-    console.log(divGauche);
 
     // Evenement au click des images
             imageChampion.addEventListener("click", () =>{
@@ -109,7 +107,6 @@ const divGauche = document.querySelector(".listeChampion")
 
                 // Puisque container est une nodeList, création d'une variable qui permet d'itérer sur cette liste afin de récupérer élément par élément
                 const detailGraphique = graph
-                console.log(container);
                 detailGraphique.appendChild(graphique);
 
                 // Création du graphique par chart.js
@@ -138,7 +135,30 @@ const divGauche = document.querySelector(".listeChampion")
                 
             })
 
+            fetch(`http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion/${idChampion}.json`, "GET", rechercheCapacite)
+
           }
+    }
+
+    function rechercheCapacite () {
+        const request = JSON.parse(this.response);
+
+const champions = request.data
+
+        // Récupération du nombre total de champions
+        const totalChampions = Object.keys(champions).length;
+
+        // Boucle pour afficher que 9 éléments
+
+        for (let i=0; i<=totalChampions; i++){
+
+            const championKey = Object.keys(champions);
+
+            console.log(champions);
+
+
+
+        }
     }
 
 })
