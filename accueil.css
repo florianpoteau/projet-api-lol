@@ -1,5 +1,16 @@
 body {
     margin: 0;
+    background-color: #111;
+  }
+
+.titre1{
+    color: white;
+    margin-left: 38%;
+    margin-top: 5%;
+  }
+
+  .titreDetail{
+    color: white;
   }
   
   ul {
@@ -34,14 +45,7 @@ body {
   .flex{
     display: flex;
     justify-content: space-around;
-    margin-top: 5%;
-  }
-
-  .flex .container {
-    border: 1px solid;
-    width: 25%;
-    height: 600px;
-    background-color: #9191de;
+    
   }
 
   .flex .containerImg{
@@ -52,9 +56,49 @@ body {
   }
 
   .containerImg img{
-    width: 100%;
+    width: 80%;
+    margin-top: 8%;
   }
 
   .containerImg img:hover{
     transform: scale(1.1);
+  }
+
+  .flex1{
+    display: flex;
+  }
+
+  .flexgauche{
+display: flex;
+width: 80%;
+flex: 1;
+flex-wrap: wrap;
+  }
+
+  .imageDetail{
+    margin-top: 10%;
+    margin-bottom: 20%;
+    width: 70%;
+    margin-left: 20%;
+  }
+
+
+  .flexDroite{
+    margin-right: 15%;
+    flex: 1;
+  }
+
+  .nomChampion{
+    color: white;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  main{
+    background-color: white;
+  }
+
+  .listeChampion{
+    display: flex;
+    flex-wrap: wrap;
   }

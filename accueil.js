@@ -17,12 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
         //Permet d'envoyer la requête
         request.send();
       }
-      
-    //   Variable pour récupérer toutes les images
-const listeImage = document.querySelectorAll(".containerImg");
 
-// Variable pour récupérer tout les container qui englobe les images et les graphiques
-const container = document.querySelectorAll(".container")
+
+const divGauche = document.querySelector(".listeChampion")
 
     
 
@@ -33,9 +30,12 @@ const container = document.querySelectorAll(".container")
 
         const champions = request.data;
 
+        // Récupération du nombre total de champions
+        const totalChampions = Object.keys(champions).length;
+
         // Boucle pour afficher que 9 éléments
 
-        for (let i=0; i<=9; i++){
+        for (let i=0; i<=totalChampions; i++){
 
             // Récupération des champions par champion
         const championKey = Object.keys(champions)[i+1];
@@ -46,16 +46,46 @@ const container = document.querySelectorAll(".container")
         const championImage = champion.image.full;
 
         // Création de l'image dans le dom
+
+        const containerImg1 = document.createElement("div")
+        containerImg1.classList.add("containerImg")
+
+        const container = document.createElement("div")
+        container.classList.add("container")
+
+        container.appendChild(containerImg1)
+
+        console.log(container);
+
         const imageChampion = document.createElement("img")
 
         imageChampion.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${championImage}`;
 
         // Puisque listeImage est une nodeList, création d'une variable qui permet d'itérer sur cette liste afin de récupérer élément par élément
-        const containerImg = listeImage[i];
-    containerImg.appendChild(imageChampion);
-    // Evenement au click des images
+    containerImg1.appendChild(imageChampion);
 
+    divGauche.appendChild(container)
+
+    console.log(divGauche);
+
+    // Evenement au click des images
             imageChampion.addEventListener("click", () =>{
+
+                const graph = document.querySelector(".graphique");
+                const imageChampion = document.querySelector(".imageChampion");
+                const nomChampion = document.querySelector(".nomChampion");
+
+                nomChampion.innerHTML = `${champion.name}`
+
+                const img = document.createElement("img");
+
+                img.classList.add("imageDetail")
+
+                img.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${championImage}`;
+
+                imageChampion.appendChild(img)
+
+                console.log("click");
 
                 const hp = champion.stats.hp
                 const armure = champion.stats.armor
@@ -65,20 +95,22 @@ const container = document.querySelectorAll(".container")
 
                 // Création du graphique en html
                 const graphique = document.createElement("div")
+                graphique.classList.add("graph")
                 const canva = document.createElement("canvas")
                 canva.id = "myChart"
 
                 graphique.appendChild(canva);
 
                 // Puisque container est une nodeList, création d'une variable qui permet d'itérer sur cette liste afin de récupérer élément par élément
-                const detailGraphique = container[i]
+                const detailGraphique = graph
+                console.log(container);
                 detailGraphique.appendChild(graphique);
 
                 // Création du graphique par chart.js
                 const ctx = document.getElementById('myChart');
 
                     new Chart(ctx, {
-                        type: 'radar',
+                        type: 'pie',
                         data: {
                         labels: ['HP', 'Armure', 'Attaque', 'Speed'],
                         datasets: [{
