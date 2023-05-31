@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
 
-    fetch(`https://br1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=${api_key}`, "GET", championListe)
+    fetch(`https://br1.api.riotgames.com/lol/platform/v3/champion-rotation?api_key=${api_key}`, "GET", championListe)
 
     function championListe(){
         const request = JSON.parse(this.response);
