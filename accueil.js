@@ -75,18 +75,24 @@ const divGauche = document.querySelector(".listeChampion")
                 const imageChampion = document.querySelector(".imageChampion");
                 const nomChampion = document.querySelector(".nomChampion");
 
+                nomChampion.innerhtml = ""
+
                 nomChampion.innerHTML = `${champion.name}`
 
                 const img = document.createElement("img");
 
                 img.classList.add("imageDetail")
 
+
                 img.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${championImage}`;
+
+                imageChampion.innerHTML = '';
 
                 imageChampion.appendChild(img)
 
-                console.log("click");
+                graph.innerHTML = '';
 
+                // Récupération des statistiques
                 const hp = champion.stats.hp
                 const armure = champion.stats.armor
                 const attaque = champion.stats.attaque

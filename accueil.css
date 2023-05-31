@@ -3,6 +3,10 @@ body {
     background-color: #111;
   }
 
+  .logo{
+    height: 70px;
+  }
+
 .titre1{
     color: white;
     margin-left: 38%;
@@ -19,7 +23,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #147485ba;
   }
   
   li {
@@ -30,12 +34,20 @@ body {
     display: flex;
     color: white;
     text-align: center;
-    padding: 5% 184px;
+    padding: 8% 120px;
     text-decoration: none;
+  }
+
+  #a1{
+    padding: 8.4% 120px;
+  }
+
+  #a3{
+    padding: 9.5% 120px;
   }
   
   li a:hover:not(.active) {
-    background-color: #111;
+    background-color: #147485;
   }
   
   .active {
