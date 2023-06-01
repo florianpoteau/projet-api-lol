@@ -77,6 +77,7 @@ const divGauche = document.querySelector(".listeChampion")
 
     // Evenement au click des images et appel de la fonction pour afficher les détails
             imageChampion.addEventListener("click", () =>{
+              
 
               affichageStatistique()
                 
@@ -87,12 +88,19 @@ const divGauche = document.querySelector(".listeChampion")
             // Gestion du formulaire de recherche ci-dessous
 
             const form = document.querySelector(".rechercheChampion")
+            const input = document.getElementById("recherche")
 
             form.addEventListener("submit", (e) =>{
 
               e.preventDefault()
 
+              const rechercheInput = input.value.trim().toLowerCase();
+
+              if(champion.name.toLowerCase().includes(rechercheInput)){
+
               affichageStatistique()
+
+              }
 
             })
 

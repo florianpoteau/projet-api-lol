@@ -8,6 +8,10 @@ body {
     background-color: #111;
   }
 
+  nav{
+    background-color: #147485ba;
+  }
+
   .logo{
     height: 70px;
   }
