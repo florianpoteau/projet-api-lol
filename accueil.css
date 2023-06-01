@@ -1,3 +1,8 @@
+:root{
+  --text-color: white;
+  --align: center
+}
+
 body {
     margin: 0;
     background-color: #111;
@@ -8,13 +13,14 @@ body {
   }
 
 .titre1{
-    color: white;
+    color: var(--text-color);
     margin-left: 38%;
     margin-top: 5%;
   }
 
   .titreDetail{
-    color: white;
+    text-align: var(--align);
+    color: var(--text-color);
   }
   
   ul {
@@ -32,7 +38,7 @@ body {
   
   li a {
     display: flex;
-    color: white;
+    color: var(--text-color);
     text-align: center;
     padding: 8% 120px;
     text-decoration: none;
@@ -70,6 +76,7 @@ body {
   .containerImg img{
     width: 80%;
     margin-top: 8%;
+
   }
 
   .containerImg img:hover{
@@ -82,7 +89,7 @@ body {
 
   .flexgauche{
 display: flex;
-width: 80%;
+width: 75%;
 flex: 1;
 flex-wrap: wrap;
   }
@@ -91,26 +98,87 @@ flex-wrap: wrap;
     margin-top: 10%;
     margin-bottom: 20%;
     width: 70%;
-    margin-left: 20%;
+    margin-left: 25%;
   }
 
 
   .flexDroite{
-    margin-right: 15%;
+    margin-left: 10%;
     flex: 1;
   }
 
   .nomChampion{
-    color: white;
+    color: var(--text-color);
     font-size: 20px;
     text-align: center;
   }
 
   main{
-    background-color: white;
+    background-color: var(--text-color);
+    margin-top: 10%;
+    margin-left: 20%;
   }
 
   .listeChampion{
+    margin-left: 5%;
     display: flex;
     flex-wrap: wrap;
   }
+
+  .position{
+    margin-top: 1%;
+    position: fixed;
+    width: 20%;
+    height: 90%;
+    width: 20%;
+    overflow: auto;
+    padding-left: 10%;
+    padding-right: 15%;
+  }
+
+  .imageChampion{
+    margin-right: 15%;
+  }
+
+  .imageChampion img{
+    width: 80%;
+  }
+
+  .titreSort{
+    color: var(--text-color);
+    margin-left: 25%;
+    font-size: 20px;
+  }
+
+  .graph{
+    width: 250px;
+    height: 250px;
+  }
+
+  
+
+  .containerSort{
+    width: 120%;
+  }
+
+  .containerSort{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .containerSort ul{
+    display: flex;
+    padding-top: 5%;
+    justify-content: space-around;
+    min-width: 700px;
+    min-height: 130px;
+  }
+
+  .containerSort ul li {
+    max-width: 60px;
+  }
+
+  .capaciteActive{
+    color: var(--text-color);
+  }
+  

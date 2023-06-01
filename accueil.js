@@ -132,33 +132,72 @@ const divGauche = document.querySelector(".listeChampion")
                     });
 
 
-                
+                    fetch(`http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion/${idChampion}.json`, "GET", rechercheCapacite)
             })
-
-            fetch(`http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion/${idChampion}.json`, "GET", rechercheCapacite)
 
           }
     }
 
-    function rechercheCapacite () {
+    // Création d'une fonction afin de récupérer les capacité des champions
+
+    function rechercheCapacite() {
         const request = JSON.parse(this.response);
-
-const champions = request.data
-
-        // Récupération du nombre total de champions
+        const champions = request.data;
         const totalChampions = Object.keys(champions).length;
+        const containerSort = document.querySelector(".containerSort");
+        containerSort.innerHTML = "";
 
-        // Boucle pour afficher que 9 éléments
+        // Création d'une boucle pour parcourir tous les champions
+      
+        for (let i = 0; i <= totalChampions; i++) {
+          const championKey = Object.keys(champions)[i];
+          const champion = champions[championKey];
+          const spells = champion.spells;
+      
+          const titreSort = document.querySelector(".titreSort");
 
-        for (let i=0; i<=totalChampions; i++){
+          const capaciteActive = document.createElement("p")
+          const ul = document.createElement("ul");
 
-            const championKey = Object.keys(champions);
+            // // Afficher le titre "Capacité active"
+            // capaciteActive.innerHTML = "Capacité active:"
+            // capaciteActive.classList.add("capaciteActive")
+            // // Ajout de capaciteActive au containerSort
+            // containerSort.appendChild(capaciteActive);
+      
+          console.log(spells);
 
-            console.log(champions);
+        //   For each pour parcourir tous les spells de tous les champions
+          spells.forEach((spell, index) => {
+            
 
+            // Création des éléments
+            const li = document.createElement("li");
+            const imageSort = document.createElement("img");
+            const nomSort = document.createElement("p");
 
+            // Variable qui affiche le nom du sort
+            nomSort.innerHTML = `${spell.name}`;
 
+            // afficher le titre 
+            titreSort.innerHTML = "Les sorts du champion :";
+      
+            // Récupérer chaque image de chaque champion
+            const image = spell.image.full;
+      
+            imageSort.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/spell/${image}`;
+
+            console.log(champion.passive);
+      
+            // création de la liste dans le container
+            ul.appendChild(li);
+            li.appendChild(imageSort);
+            li.appendChild(nomSort); 
+          });
+      
+          containerSort.appendChild(ul);
         }
-    }
+      }
+      
 
 })
