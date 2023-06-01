@@ -36,11 +36,17 @@ const divGauche = document.querySelector(".listeChampion")
         // Boucle pour afficher que 9 éléments
 
         for (let i=0; i<=totalChampions; i++){
+          
 
             // Récupération des champions par champion
         const championKey = Object.keys(champions)[i+1];
 
         const champion = champions[championKey];
+
+        // Nom des champion
+        const nomChampion = document.createElement("p");
+        nomChampion.innerHTML = `${champion.name}`
+        nomChampion.classList.add("nomChampionAccueil")
 
         const idChampion = champion.id
 
@@ -64,140 +70,182 @@ const divGauche = document.querySelector(".listeChampion")
         // Puisque listeImage est une nodeList, création d'une variable qui permet d'itérer sur cette liste afin de récupérer élément par élément
     containerImg1.appendChild(imageChampion);
 
+    containerImg1.appendChild(nomChampion)
+
     divGauche.appendChild(container)
 
-    // Evenement au click des images
+
+    // Evenement au click des images et appel de la fonction pour afficher les détails
             imageChampion.addEventListener("click", () =>{
 
-                const graph = document.querySelector(".graphique");
-                const imageChampion = document.querySelector(".imageChampion");
-                const nomChampion = document.querySelector(".nomChampion");
-
-                nomChampion.innerhtml = ""
-
-                nomChampion.innerHTML = `${champion.name}`
-
-                const img = document.createElement("img");
-
-                img.classList.add("imageDetail")
-
-
-                img.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${championImage}`;
-
-                imageChampion.innerHTML = '';
-
-                imageChampion.appendChild(img)
-
-                graph.innerHTML = '';
-
-                // Récupération des statistiques
-                const hp = champion.stats.hp
-                const armure = champion.stats.armor
-                const attaque = champion.stats.attaque
-                const speed = champion.stats.movespeed
-
-
-                // Création du graphique en html
-                const graphique = document.createElement("div")
-                graphique.classList.add("graph")
-                const canva = document.createElement("canvas")
-                canva.id = "myChart"
-
-                graphique.appendChild(canva);
-
-                // Puisque container est une nodeList, création d'une variable qui permet d'itérer sur cette liste afin de récupérer élément par élément
-                const detailGraphique = graph
-                detailGraphique.appendChild(graphique);
-
-                // Création du graphique par chart.js
-                const ctx = document.getElementById('myChart');
-
-                    new Chart(ctx, {
-                        type: 'pie',
-                        data: {
-                        labels: ['HP', 'Armure', 'Attaque', 'Speed'],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [hp, armure, attaque, speed],
-                            borderWidth: 1
-                        }]
-                        },
-                        options: {
-                        scales: {
-                            y: {
-                            beginAtZero: true
-                            }
-                        }
-                        }
-                    });
-
-
-                    fetch(`http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion/${idChampion}.json`, "GET", rechercheCapacite)
+              affichageStatistique()
+                
             })
+
+            // Evenement au click des images et appel de la fonction pour afficher les détails
+
+            // Gestion du formulaire de recherche ci-dessous
+
+            const form = document.querySelector(".rechercheChampion")
+
+            form.addEventListener("submit", (e) =>{
+
+              e.preventDefault()
+
+              affichageStatistique()
+
+            })
+
+      function affichageStatistique() {
+        const graph = document.querySelector(".graphique");
+        const imageChampion = document.querySelector(".imageChampion");
+        const nomChampion = document.querySelector(".nomChampion");
+            
+        nomChampion.innerhtml = ""
+            
+        nomChampion.innerHTML = `${champion.name}`
+            
+        const img = document.createElement("img");
+            
+        img.classList.add("imageDetail")
+            
+            
+        img.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${championImage}`;
+            
+        imageChampion.innerHTML = '';
+            
+        imageChampion.appendChild(img)
+            
+        graph.innerHTML = '';
+            
+        // Récupération des statistiques
+        const hp = champion.stats.hp
+        const armure = champion.stats.armor
+        const attaque = champion.stats.attaque
+        const speed = champion.stats.movespeed
+            
+            
+        // Création du graphique en html
+        const graphique = document.createElement("div")
+        graphique.classList.add("graph")
+        const canva = document.createElement("canvas")
+        canva.id = "myChart"
+
+        graphique.appendChild(canva);
+
+        // Puisque container est une nodeList, création d'une variable qui permet d'itérer sur cette liste afin de récupérer élément par élément
+        const detailGraphique = graph
+        detailGraphique.appendChild(graphique);
+            
+        // Création du graphique par chart.js
+        const ctx = document.getElementById('myChart');
+            
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                labels: ['HP', 'Armure', 'Attaque', 'Speed'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [hp, armure, attaque, speed],
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+            });
+            
+            
+                                fetch(`http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion/${idChampion}.json`, "GET", rechercheCapacite)
+            }
 
           }
     }
 
+
+
     // Création d'une fonction afin de récupérer les capacité des champions
-
     function rechercheCapacite() {
-        const request = JSON.parse(this.response);
-        const champions = request.data;
-        const totalChampions = Object.keys(champions).length;
-        const containerSort = document.querySelector(".containerSort");
-        containerSort.innerHTML = "";
+      const request = JSON.parse(this.response);
+      const champions = request.data;
+      const totalChampions = Object.keys(champions).length;
+      const containerSort = document.querySelector(".containerSort");
+      containerSort.innerHTML = "";
+  
+      // variable pour le titre Capacité active
+      const capaciteActiveDiv = document.createElement("div");
+      capaciteActiveDiv.classList.add("capaciteActive");
+      containerSort.appendChild(capaciteActiveDiv);
 
-        // Création d'une boucle pour parcourir tous les champions
+      // Variable pour la div capacité passive
+      const divCapacitePassive = document.querySelector(".containerPassive");
+      divCapacitePassive.innerHTML = ''
+
+      // Variable pour le titre capacité passive
+      const textCapacitePassive = document.createElement("p");
+      textCapacitePassive.innerHTML = "Capacité passive";
+      textCapacitePassive.classList.add("textCapacitePassive")
+
+      // Variable pour afficher l'image de la capacité passive
+      const imgCapacitePassive = document.createElement("img");
+      imgCapacitePassive.classList.add("imagePassive")
       
-        for (let i = 0; i <= totalChampions; i++) {
+      // Variable pour le nom de la capacité passive
+      const nomActivitePassive = document.createElement("p");
+  
+      const titreSort = document.querySelector(".titreSort");
+      titreSort.innerHTML = "Les sorts du champion :";
+  
+      // Boucle pour parcourir tous les champions
+      for (let i = 0; i <= totalChampions; i++) {
           const championKey = Object.keys(champions)[i];
           const champion = champions[championKey];
           const spells = champion.spells;
-      
-          const titreSort = document.querySelector(".titreSort");
 
-          const capaciteActive = document.createElement("p")
+          // Récupération de l'image de la capacité passive
+          const imagePassive = champion.passive.image.full
+          imgCapacitePassive.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/passive/${imagePassive}`
+
+          // Récupération du nom de la capacité passive
+          const nomPassive = champion.passive.name
+          nomActivitePassive.innerHTML = `${nomPassive}`
+          nomActivitePassive.classList.add("nomCapacitePassive")
+  
+          const capaciteActive = document.createElement("p");
+          capaciteActiveDiv.appendChild(capaciteActive);
+          capaciteActive.innerHTML = "Capacité active:";
+          capaciteActive.classList.add("capaciteActive");
+  
           const ul = document.createElement("ul");
-
-            // // Afficher le titre "Capacité active"
-            // capaciteActive.innerHTML = "Capacité active:"
-            // capaciteActive.classList.add("capaciteActive")
-            // // Ajout de capaciteActive au containerSort
-            // containerSort.appendChild(capaciteActive);
-      
-          console.log(spells);
-
-        //   For each pour parcourir tous les spells de tous les champions
-          spells.forEach((spell, index) => {
-            
-
-            // Création des éléments
-            const li = document.createElement("li");
-            const imageSort = document.createElement("img");
-            const nomSort = document.createElement("p");
-
-            // Variable qui affiche le nom du sort
-            nomSort.innerHTML = `${spell.name}`;
-
-            // afficher le titre 
-            titreSort.innerHTML = "Les sorts du champion :";
-      
-            // Récupérer chaque image de chaque champion
-            const image = spell.image.full;
-      
-            imageSort.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/spell/${image}`;
-
-            console.log(champion.passive);
-      
-            // création de la liste dans le container
-            ul.appendChild(li);
-            li.appendChild(imageSort);
-            li.appendChild(nomSort); 
+  
+          // For each pour parcourir tous les sorts
+          spells.forEach((spell) => {
+              const li = document.createElement("li");
+              const imageSort = document.createElement("img");
+              const nomSort = document.createElement("p");
+  
+              nomSort.innerHTML = `${spell.name}`;
+  
+              const image = spell.image.full;
+              imageSort.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/spell/${image}`;
+  
+              ul.appendChild(li);
+              li.appendChild(imageSort);
+              li.appendChild(nomSort);
           });
-      
+  
           containerSort.appendChild(ul);
-        }
+
+          // AppendChild pour la partie capacité passive
+          divCapacitePassive.appendChild(textCapacitePassive);
+          divCapacitePassive.appendChild(imgCapacitePassive);
+          divCapacitePassive.appendChild(nomActivitePassive);
       }
+  }
       
 
 })

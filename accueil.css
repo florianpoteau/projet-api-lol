@@ -29,7 +29,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #147485ba;
+
   }
   
   li {
@@ -88,10 +88,9 @@ body {
   }
 
   .flexgauche{
-display: flex;
 width: 75%;
 flex: 1;
-flex-wrap: wrap;
+
   }
 
   .imageDetail{
@@ -130,7 +129,6 @@ flex-wrap: wrap;
     position: fixed;
     width: 20%;
     height: 90%;
-    width: 20%;
     overflow: auto;
     padding-left: 10%;
     padding-right: 15%;
@@ -158,19 +156,15 @@ flex-wrap: wrap;
   
 
   .containerSort{
-    width: 120%;
-  }
-
-  .containerSort{
-    display: flex;
-    justify-content: space-around;
+    width:  170%;
+    background-color: #147485ba;
   }
 
   .containerSort ul{
     display: flex;
     padding-top: 5%;
     justify-content: space-around;
-    min-width: 700px;
+    min-width: 500px;
     min-height: 130px;
   }
 
@@ -179,6 +173,40 @@ flex-wrap: wrap;
   }
 
   .capaciteActive{
+    text-align: center;
+    color: var(--text-color);
+  }
+
+  .textCapacitePassive{
+    color: var(--text-color);
+    margin-left: 30%;
+  }
+
+  .nomCapacitePassive{
+    margin-left: 30%;
+    color: var(--text-color);
+  }
+
+  .imagePassive{
+    margin-left: 39%;
+  }
+
+  .recherche{
+    color: var(--text-color);
+    margin-left: 35%;
+  }
+
+  #recherche{
+    margin-left: 35%;
+  }
+
+  .bouton{
+    margin-left: 35%;
+    width: 25.3%;
+    height: 40px;
+  }
+
+  .nomChampionAccueil{
     color: var(--text-color);
   }
   
