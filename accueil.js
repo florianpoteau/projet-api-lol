@@ -18,8 +18,30 @@ document.addEventListener('DOMContentLoaded', function () {
         request.send();
       }
 
+// Variable pour le bouton générer
+const btnGenerate = document.querySelector(".btnGenerate")
+const inputGenerate = document.getElementById("inputGenerate")
+const btnEnvoyer = document.querySelector(".envoyer")
 
-const divGauche = document.querySelector(".listeChampion")
+btnGenerate.addEventListener("click", (e) => {
+  e.preventDefault();
+  fetch("http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion.json", "GET", championGenerate);
+});
+
+function championGenerate() {
+  const request = JSON.parse(this.response);
+  const champions = request.data;
+  const championKeys = Object.keys(champions);
+  const totalChampions = championKeys.length;
+
+  // Generate a random index to select a random champion
+  const randomIndex = Math.floor(Math.random() * totalChampions);
+  const randomChampionKey = championKeys[randomIndex];
+  console.log(randomChampionKey);
+  const randomChampion = champions[randomChampionKey];
+  console.log(randomChampion);
+}
+
 
     
 
@@ -33,6 +55,12 @@ const divGauche = document.querySelector(".listeChampion")
         // Récupération du nombre total de champions
         const totalChampions = Object.keys(champions).length;
 
+        const divGauche = document.querySelector(".listeChampion");
+        divGauche.innerHTML = '';
+
+
+
+
         // Boucle pour afficher que 9 éléments
 
         for (let i=0; i<=totalChampions; i++){
@@ -42,6 +70,8 @@ const divGauche = document.querySelector(".listeChampion")
         const championKey = Object.keys(champions)[i+1];
 
         const champion = champions[championKey];
+
+        console.log(champion);
 
         // Nom des champion
         const nomChampion = document.createElement("p");
@@ -67,12 +97,37 @@ const divGauche = document.querySelector(".listeChampion")
 
         imageChampion.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${championImage}`;
 
-        // Puisque listeImage est une nodeList, création d'une variable qui permet d'itérer sur cette liste afin de récupérer élément par élément
     containerImg1.appendChild(imageChampion);
 
     containerImg1.appendChild(nomChampion)
 
     divGauche.appendChild(container)
+
+    // Gestion du filtre
+
+            // Récupération de la valeur sélectionnée du filtre
+  const filtre = document.getElementById("filtre");
+
+
+// Gestion du filtre
+filtre.addEventListener("change", () => {
+    const filtreValue = filtre.value.toLowerCase().trim();
+    if (filtreValue === champion.partype.toLowerCase().trim()) {
+      console.log(filtreValue);
+      imageChampion.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${championImage}`;
+
+    } else {
+        container.innerHTML = ""
+      imageChampion.classList.remove("filtre-selected"); 
+    }
+  });
+
+  
+  
+
+
+
+
 
 
     // Evenement au click des images et appel de la fonction pour afficher les détails
@@ -103,6 +158,8 @@ const divGauche = document.querySelector(".listeChampion")
               }
 
             })
+
+
 
       function affichageStatistique() {
         const graph = document.querySelector(".graphique");
@@ -153,7 +210,7 @@ const divGauche = document.querySelector(".listeChampion")
                 data: {
                 labels: ['HP', 'Armure', 'Attaque', 'Speed'],
                 datasets: [{
-                    label: '# of Votes',
+                    label: '',
                     data: [hp, armure, attaque, speed],
                     borderWidth: 1
                 }]

@@ -213,4 +213,30 @@ flex: 1;
   .nomChampionAccueil{
     color: var(--text-color);
   }
+
+  .btnGenerate{
+    margin-left: 35%;
+    width: 25.3%;
+    height: 40px;
+  }
+
+  #inputGenerate{
+    margin-left: 35%;
+  }
+
+  .titreGenerate{
+    color: white;
+    margin-left: 35%;
+  }
+
+  .envoyer{
+    margin-left: 35%;
+    width: 25.3%;
+    height: 40px;
+  }
   
+  #filtre{
+    margin-left: 35%;
+    width: 25%;
+    height: 25px;
+  }
