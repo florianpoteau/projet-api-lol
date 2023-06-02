@@ -46,9 +46,7 @@ function championGenerate() {
 // Génére un champion aléatoire
   const randomIndex = Math.floor(Math.random() * totalChampions);
   const randomChampionKey = championKeys[randomIndex];
-  console.log(randomChampionKey);
   const randomChampion = champions[randomChampionKey];
-  console.log(randomChampion);
   
 
 // Création d'une variable tentative qui itère de 1 à 7 pour 7 tentatives
@@ -198,7 +196,6 @@ imgRandomChampion.classList.add("imageRandom")
 filtre.addEventListener("change", () => {
     const filtreValue = filtre.value.toLowerCase().trim();
     if (filtreValue === champion.partype.toLowerCase().trim()) {
-      console.log(filtreValue);
       imageChampion.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${championImage}`;
 
     } else {
