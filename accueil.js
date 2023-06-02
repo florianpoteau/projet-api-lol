@@ -27,14 +27,28 @@ const titreGenerate = document.querySelector(".titreGenerate")
 
 
 
+// Ajouter une variable pour stocker l'ID du timer
+var timerId = null;
+
 btnGenerate.addEventListener("click", (e) => {
   e.preventDefault();
   fetch("http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion.json", "GET", championGenerate);
   if(e.target){
-    btnGenerate.style.display = "none"
-    titreGenerate.style.display = "none"
+    btnGenerate.style.display = "none";
+    titreGenerate.style.display = "none";
+
+    // Démarrer le timer de 60 secondes
+    timerId = setTimeout(() => {
+      // Code à exécuter lorsque le timer se termine
+      clearTimeout(timerId); // Effacer le timer
+      // Ajouter le code pour créer un nouvel élément p sous le bouton
+      const timerElement = document.createElement("p");
+      timerElement.innerHTML = "Le temps est écoulé !";
+      document.body.appendChild(timerElement);
+    }, 60000); // 60 secondes (60000 millisecondes)
   }
 });
+
 
 function championGenerate() {
   const request = JSON.parse(this.response);
@@ -51,6 +65,7 @@ function championGenerate() {
 
 // Création d'une variable tentative qui itère de 1 à 7 pour 7 tentatives
   let tentative = 0
+  
 
 const nbTentative = document.querySelector(".tentative")
 const imgRandomChampion = document.querySelector(".imgRandomChampion")
@@ -71,7 +86,7 @@ imgRandomChampion.classList.add("imageRandom")
 
     // Si l'utilisateur n'a pas trouvé le bon champion
     else{
-      let tentativeRestante = 4-tentative
+      let tentativeRestante = 3-tentative
       tentative++
       nbTentative.innerHTML = `Il vous reste ${tentativeRestante} tentative(s)`
 
@@ -83,11 +98,7 @@ imgRandomChampion.classList.add("imageRandom")
 
           break;
 
-          case 2: indice.innerHTML = `Texte de présentation du champion: ${randomChampion.blurb}`
-
-          break;
-
-          case 3: 
+          case 2: 
 
           const nomChampion = randomChampion.name
 
@@ -97,7 +108,7 @@ imgRandomChampion.classList.add("imageRandom")
 
           break;
 
-          case 4:
+          case 3:
 
           const tags = randomChampion.tags[0]
 
@@ -105,7 +116,7 @@ imgRandomChampion.classList.add("imageRandom")
 
           break;
 
-          case 5:
+          case 4:
 
           const tags1 = randomChampion.tags[1];
 
@@ -117,9 +128,17 @@ imgRandomChampion.classList.add("imageRandom")
       form1.appendChild(indice)
 
 
-      if (tentative >= 5){
+      if (tentative >= 4){
         indice.innerHTML= ""
         nbTentative.innerHTML = ""
+
+        const reponse = document.createElement("p");
+
+        reponse.classList.add("reponse")
+
+      reponse.innerHTML = `La réponse était: ${randomChampion.name}`
+
+      form1.appendChild(reponse)
         
         form1.removeEventListener("submit", (e));
         inputGenerate.disabled = true;

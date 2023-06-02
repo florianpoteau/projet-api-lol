@@ -253,7 +253,7 @@ flex: 1;
 
 h3{
   color: white;
-  margin-left: 20%;
+  margin-left: 25%;
 }
 
   .imageRandom{
@@ -281,4 +281,11 @@ h3{
   .nbtentative1{
     color: red;
     font-size: 30px;
+  }
+
+  .reponse{
+    color: #58ecf3;
+    text-align: center;
+    font-size: 25px;
+    font-style: italic;
   }
