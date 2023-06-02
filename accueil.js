@@ -43,7 +43,7 @@ function championGenerate() {
   const totalChampions = championKeys.length;
 
 
-  // Generate a random index to select a random champion
+// Génére un champion aléatoire
   const randomIndex = Math.floor(Math.random() * totalChampions);
   const randomChampionKey = championKeys[randomIndex];
   console.log(randomChampionKey);
@@ -55,37 +55,82 @@ function championGenerate() {
   let tentative = 0
 
 const nbTentative = document.querySelector(".tentative")
+const imgRandomChampion = document.querySelector(".imgRandomChampion")
+
+imgRandomChampion.src = `http://ddragon.leagueoflegends.com/cdn/13.10.1/img/champion/${randomChampion.image.full}`
+imgRandomChampion.classList.add("imageRandom")
 
   form1.addEventListener("submit", (e) => {
     e.preventDefault()
     console.log(inputGenerate.value.trim());
-    
-    if(inputGenerate.value.trim() == randomChampionKey.trim()){
+
+    // Si l'utilisateur a trouvé le bon champion
+    if(inputGenerate.value.trim().toLowerCase() == randomChampionKey.trim().toLowerCase()){
       btnGenerate.style.display = "none" 
       nbTentative.innerHTML = "Bravo vous avez trouvé !!!"
+      nbTentative.classList.add("nbtentative1")
     }
 
+    // Si l'utilisateur n'a pas trouvé le bon champion
     else{
-      let tentativeRestante = 6-tentative
+      let tentativeRestante = 4-tentative
       tentative++
       nbTentative.innerHTML = `Il vous reste ${tentativeRestante} tentative(s)`
 
+      const indice = document.createElement("p");
+      indice.classList.add("indice")
+      switch(tentative){
+        case 1:
+          indice.innerHTML = `le champion est de type: ${randomChampion.partype}`
 
-      if (tentative >= 7){
+          break;
+
+          case 2: indice.innerHTML = `Texte de présentation du champion: ${randomChampion.blurb}`
+
+          break;
+
+          case 3: 
+
+          const nomChampion = randomChampion.name
+
+          const premiereLettreDuNom = nomChampion.charAt(0);
+
+          indice.innerHTML = `la première lettre de son nom est le: ${premiereLettreDuNom}`
+
+          break;
+
+          case 4:
+
+          const tags = randomChampion.tags[0]
+
+          indice.innerHTML = `Le champion est un ${tags}`
+
+          break;
+
+          case 5:
+
+          const tags1 = randomChampion.tags[1];
+
+          indice.innerHTML = `Le champion est aussi un ${tags1}`
+
+
+        
+      }
+      form1.appendChild(indice)
+
+
+      if (tentative >= 5){
+        indice.innerHTML= ""
         nbTentative.innerHTML = ""
         
         form1.removeEventListener("submit", (e));
         inputGenerate.disabled = true;
       }
     }
-    btnClicked = true;
   })
 
 
 }
-
-
-    
 
     fetch(`http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion.json`, "GET", championListe)
 
@@ -112,8 +157,6 @@ const nbTentative = document.querySelector(".tentative")
         const championKey = Object.keys(champions)[i+1];
 
         const champion = champions[championKey];
-
-        console.log(champion);
 
         // Nom des champion
         const nomChampion = document.createElement("p");

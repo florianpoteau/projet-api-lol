@@ -226,7 +226,7 @@ flex: 1;
 
   .titreGenerate{
     color: white;
-    margin-left: 35%;
+    margin-left: 30%;
   }
 
   .envoyer{
@@ -244,4 +244,41 @@ flex: 1;
   .tentative{
     color: white;
     text-align: center;
+  }
+
+  .indice {
+    color: white;
+    text-align: center;
+  }
+
+h3{
+  color: white;
+  margin-left: 20%;
+}
+
+  .imageRandom{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 39%;
+  }
+
+  .formChampionGenerate{
+    border: 2px solid #147485ba;
+    padding: 0;
+    width: 75%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+  }
+
+  .rechercheChampion{
+    border: 2px solid #147485ba;
+    margin-bottom: 10%;
+    width: 75%;
+    margin-left: 10%;
+    margin-top: 5%;
+  }
+
+  .nbtentative1{
+    color: red;
+    font-size: 30px;
   }
