@@ -22,10 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
 const btnGenerate = document.querySelector(".btnGenerate")
 const inputGenerate = document.getElementById("inputGenerate")
 const btnEnvoyer = document.querySelector(".envoyer")
+const form1 = document.querySelector(".formChampionGenerate")
+const titreGenerate = document.querySelector(".titreGenerate")
+
+
 
 btnGenerate.addEventListener("click", (e) => {
   e.preventDefault();
   fetch("http://ddragon.leagueoflegends.com/cdn/13.10.1/data/en_US/champion.json", "GET", championGenerate);
+  if(e.target){
+    btnGenerate.style.display = "none"
+    titreGenerate.style.display = "none"
+  }
 });
 
 function championGenerate() {
@@ -34,12 +42,46 @@ function championGenerate() {
   const championKeys = Object.keys(champions);
   const totalChampions = championKeys.length;
 
+
   // Generate a random index to select a random champion
   const randomIndex = Math.floor(Math.random() * totalChampions);
   const randomChampionKey = championKeys[randomIndex];
   console.log(randomChampionKey);
   const randomChampion = champions[randomChampionKey];
   console.log(randomChampion);
+  
+
+// Création d'une variable tentative qui itère de 1 à 7 pour 7 tentatives
+  let tentative = 0
+
+const nbTentative = document.querySelector(".tentative")
+
+  form1.addEventListener("submit", (e) => {
+    e.preventDefault()
+    console.log(inputGenerate.value.trim());
+    
+    if(inputGenerate.value.trim() == randomChampionKey.trim()){
+      btnGenerate.style.display = "none" 
+      nbTentative.innerHTML = "Bravo vous avez trouvé !!!"
+    }
+
+    else{
+      let tentativeRestante = 6-tentative
+      tentative++
+      nbTentative.innerHTML = `Il vous reste ${tentativeRestante} tentative(s)`
+
+
+      if (tentative >= 7){
+        nbTentative.innerHTML = ""
+        
+        form1.removeEventListener("submit", (e));
+        inputGenerate.disabled = true;
+      }
+    }
+    btnClicked = true;
+  })
+
+
 }
 
 
@@ -118,14 +160,9 @@ filtre.addEventListener("change", () => {
 
     } else {
         container.innerHTML = ""
-      imageChampion.classList.remove("filtre-selected"); 
+
     }
   });
-
-  
-  
-
-
 
 
 
