@@ -24,7 +24,7 @@ h2{
 }
 
 .imageItem{
-    width: 10%;
+    width: 90px;
     margin-left: 5%;
     margin-top: 5%;
 }
@@ -69,4 +69,19 @@ margin-left: 35%;
     width: 25.3%;
     height: 40px;
   }
+  
+  .nomImg{
+    color: white;
+    width: 75%;
+    text-align: center;
+  }
+
+  .divflex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Alignement à gauche */
+    gap: 20px;
+  }
+
+
 

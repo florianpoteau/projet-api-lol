@@ -28,18 +28,31 @@ function listeItem () {
 
     const rechercheInput = input.value.trim().toLowerCase()
 
+    const div = document.createElement("div")
+
+    div.classList.add("divflex")
+
+    gaucheItem.appendChild(div);
+
+    console.log(gaucheItem);
+
     for (const itemId in items) {
         
         const img = document.createElement("img");
         const nomImg = document.createElement("p");
+        const div1 = document.createElement("div")
+        const br = document.createElement("br")
 
         img.src = `http://ddragon.leagueoflegends.com/cdn/13.11.1/img/item/${itemId}.png`;
         img.classList.add("imageItem")
 
         nomImg.innerHTML = `${request.data[itemId].name}`
+        nomImg.classList.add("nomImg")
 
-        gaucheItem.appendChild(img)
-        gaucheItem.appendChild(nomImg)
+        div.appendChild(div1)
+        div1.appendChild(img)
+        div1.appendChild(nomImg)
+        div.appendChild(br)
         img.addEventListener("click", () =>{
             fetch("http://ddragon.leagueoflegends.com/cdn/13.11.1/data/en_US/item.json", "GET", () => clickItem (request, itemId))
         })
